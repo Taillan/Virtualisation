@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: flask-config
+  labels:
+    app: flask
+data:
+  MYSQL_HOST: database.intra
+  MYSQL_USER: root
+  MYSQL_PASSWORD: rootroot
+  MYSQL_DB: QuizzDB
+  MYSQL_HOST: 80
