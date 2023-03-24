@@ -6,4 +6,6 @@ ENV PACKAGES openssh-server openssh-client
 ENV MYSQL_ROOT_PASSWORD="rootroot"
 ENV MYSQL_DATABASE="QuizzDB"
 
+
+EXPOSE 5000
 COPY ./init_db.sql /docker-entrypoint-initdb.d/init_db.sql
