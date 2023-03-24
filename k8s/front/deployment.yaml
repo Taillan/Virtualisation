@@ -19,6 +19,6 @@ spec:
       containers:
       - name: vuejs
         image: taillanm/dockerize-vuejs-app
-        imagePullPolicy: IfNotPresent
+        imagePullPolicy: Always
         ports:
         - containerPort: 80

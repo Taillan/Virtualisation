@@ -19,7 +19,7 @@ spec:
       containers:
       - name: vuejs
         image: taillanm/dockerize-flask-app
-        imagePullPolicy: IfNotPresent
+        imagePullPolicy: Always
         ports:
         - containerPort: 5000
         envFrom:
