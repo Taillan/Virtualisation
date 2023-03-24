@@ -1,5 +1,10 @@
 # My DevOps
 
+## Cloudskillsboost profiles
+
+![Monnot](k8s/devops/profile_monnot.png)
+![Taillandier](k8s/devops/profile_taillandier.png)
+
 ## Build docker
 
 ```Bash
