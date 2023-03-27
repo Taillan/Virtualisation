@@ -1,17 +1,26 @@
 # My DevOps
 
+Pour ce projet nous avons fait le choix de nous servir d'une application de Quizz réalisé au cours d'un projet précédent et qui possèdent l'avantage d'être un projet en "trois-tiers" avec front / back-end / database.
+Nous avons décidé de réaliser une dockerisation de ces trois parties et de les exposer sur un noeud kubernetes en se servant de minikube.
+Ne souhaitant pas se placer sur un google cloud avec un risque de facturation et possèdant déjà un serveur à la maison, nous avons décider de déployer notre noeud kube sur une VM Debian d'un Hyperviseur Proxmox exposé à travers le domaine suivant : https://sy3.monnot.org
+
+
 ## Cloudskillsboost profiles
 
 ![Monnot](k8s/devops/profile_monnot.png)
 ![Taillandier](k8s/devops/profile_taillandier.png)
 
-## Build docker
+## Docker
+
+### Build images
 
 ```Bash
 docker build src/BDD/ -t mariadb
 docker build src/quiz-api/ -t flask
 docker build src/quiz-ui/ -t vuejs
 ```
+
+### Run Containers
 
 ```Bash
 docker run -d -e MYSQL_HOST="" -e MYSQL_USER="root" -e MYSQL_PASSWORD="rootroot" -e MYSQL_DB="QuizzDB" -p 5000:5000 --name flask flask
@@ -23,7 +32,7 @@ docker run -d -p 3306:3306 --name mysql mysql
 
 ![cluster](k8s/devops/DevOps.png)
 
-## Minikube
+## Minikube setup
 
 ```Bash
 minikube start --cpus 4 --memory 8192
@@ -33,7 +42,7 @@ echo 'alias kubectl="minikube kubectl --"' >> ~/.bashrc
 source ~/.bashrc
 ```
 
-## Kubernetes CMD
+## Kubernetes Commands
 
 ```bash
 kubectl get pod
@@ -57,7 +66,6 @@ kubectl apply -f back/deployment.yaml
 kubectl apply -f back/service.yaml
 ```
 
-Puisque minikube ne gère pas la gestion des NodePort et LoadBalancer par défaut nous allons utiliser une option de minikube
 ```Bash
 minikube service mysql-service --url
 
@@ -82,5 +90,5 @@ kubectl apply -f devops/ingress.yaml
 En local :
 ```bash
 minikube ip # IP du cluster
-echo "192.168.X.X	front-end.intra		database.intra" >> /etc/hosts 
+echo "192.168.X.X	front-end.intra" >> /etc/hosts 
 ```
